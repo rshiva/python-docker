@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  rest-server:
+    #image and image url if not build from current context
+    build:
+      context: .
+    ports:
+      - 5000:5000
+
+  books-psql:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=nbt040
+      - POSTGRES_DB=books_api
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - psql-volume:/var/lib/postgresql/data
+
+volumes:
+  psql-volume:
